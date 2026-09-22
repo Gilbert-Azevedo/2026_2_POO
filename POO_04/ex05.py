@@ -38,15 +38,39 @@ class PlayList:
     def __str__(self):
         return f"A playlist {self.__nome} tem {len(self.__musicas)} música(s)"
 
-p = PlayList("Nacionais", "Preferidas")
-x = Musica("Construção", "Chico Buarque", "Construção")
-y = Musica("Easy", "Ivete Sangalo", "Ao Vivo")
+class UI:
+    playlists = []    # variável da class UI
 
-p.inserir(x)
-p.inserir(y)
+    @staticmethod
+    def main():   
+        op = 0
+        while op != 5:
+            op = UI.menu()
+            if op == 1: UI.inserir_playList()
+            if op == 2: UI.listar_playLists()
+            #if op == 3: UI.inserir_musica()
+            #if op == 4: UI.listar_musicas()
 
-print(p)
-for m in p.listar():
-    print("  ", m)
+    @staticmethod
+    def menu():   # 10
+        print("1 - Inserir PlayList, 2 - Listar PlayLists, \
+               3 - Inserir Música, 4 - Listar Músicas, 5 - Fim")
+        return int(input("Escolha uma opção: "))
+
+    @classmethod
+    def inserir_playList(cls):
+        nome = input("Informe o nome da playlist: ")
+        desc = input("Informe a descrição: ")
+        x = PlayList(nome, desc)
+        cls.playlists.append(x)
+        pass
+
+    @classmethod
+    def listar_playLists(cls):
+        for x in cls.playlists: print(x)
+
+UI.main()        
+
+
 
 
